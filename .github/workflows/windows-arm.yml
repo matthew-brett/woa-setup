@@ -13,12 +13,16 @@ jobs:
       - name: Setup visual studio
         uses: microsoft/setup-msbuild@v2
 
-      - name: Install winget and LLVM
+      - name: Install winget
+        # We need "powershell" to downgrade from powershell 7, because of:
+        # https://github.com/PowerShell/PowerShell/issues/18708
         shell: powershell
         run: |
           .\scripts\install_winget.ps1
-          echo "Installing LLVM"
-          winget install --id LLVM.LLVM --version "20.1.0" --accept-source-agreements --accept-package-agreements
+
+      - name: Install LLVM
+        run: |
+          winget install --id LLVM.LLVM --version "20.1.0" --accept-source-agreements --accept-package-agreements --silent
 
       - name: Test shell
         run: |
