@@ -3,6 +3,9 @@ on:
     branches:
       - main
 
+env:
+  MSYS_ROOT: c:\msys64
+
 jobs:
   build:
     runs-on: windows-11-arm
@@ -23,9 +26,17 @@ jobs:
       - name: Install MSYS2
         run: |
           winget install --id=MSYS2.MSYS2 -e
-          cd c:\msys64
-          .\clangarm64.exe
-          pacman -Suy
+          cd $env:MSYS_ROOT
+          .\clangarm64.exe | Out-Null
+          .\usr\bin\pacman -Suy --noconfirm
+          .\usr\bin\pacman.exe -S mingw-w64-clang-aarch64-cmake --noconfirm
+          # mingw-w64-clang-aarch64-flang
+          # mingw-w64-clang-aarch64-clang
+
+      - name: Add msys arm64 stuff to front of PATH
+        run: |
+          # https://stackoverflow.com/a/39628224
+          @("$env:MSYS_ROOT\clangarm64\bin") + (get-content $env:GITHUB_PATH) | set-content $env:GITHUB_PATH
 
       - name: Install LLVM
         run: |
