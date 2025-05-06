@@ -26,6 +26,10 @@ jobs:
       - name: Install MSYS2
         run: |
           winget install --id=MSYS2.MSYS2 -e --accept-source-agreements --accept-package-agreements
+
+      - name: Install cmake
+        run: |
+          echo $env:MSYS_ROOT
           cd $env:MSYS_ROOT
           pwd
           ls
