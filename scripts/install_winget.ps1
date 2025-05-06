@@ -28,5 +28,8 @@ Add-AppxProvisionedPackage -Online -PackagePath 'Winget.msixbundle' -DependencyP
 
 # Read to install
 echo $DependencyPaths
+# We seem to be running into this:
+# https://github.com/PowerShell/PowerShell/issues/18708
+echo $PSVersionTable
 echo Add-AppPackage -Path 'Winget.msixbundle' -DependencyPath "$($DependencyPaths[0])", "$($DependencyPaths[1])" -ForceTargetApplicationShutdown -ForceUpdateFromAnyVersion
 Add-AppPackage -Path 'Winget.msixbundle' -DependencyPath "$($DependencyPaths[0])", "$($DependencyPaths[1])" -ForceTargetApplicationShutdown -ForceUpdateFromAnyVersion
