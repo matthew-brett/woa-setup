@@ -33,3 +33,9 @@ jobs:
           get-command clang
           get-command flang
           get-command cmake
+
+      - uses: actions/upload-artifact@v4.3.0
+        with:
+          if: failure()
+          name: error_logs
+          path: $HOME\AppData\Local\Packages
