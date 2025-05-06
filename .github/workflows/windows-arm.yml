@@ -26,13 +26,14 @@ jobs:
 
       - name: Install CMake
         run: |
+          winget uninstall cmake --force --log cmake_uninstall.log
           winget install cmake --force --log cmake_install.log
 
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: error_logs
-          path: cmake_install.log
+          path: *.log
 
       - name: Test shell
         run: |

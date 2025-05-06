@@ -17,19 +17,10 @@ Invoke-RestMethod -Uri $_.Value -OutFile $_.Key
 }
 Expand-Archive -Path 'DesktopAppInstaller_Dependencies.zip' -DestinationPath .\ -Force
 
-echo "Files"
-ls arm64
-
 # Get the paths to all of the dependencies
 [string[]]$DependencyPaths = (Get-ChildItem -Path .\arm64 -Filter '*.appx' -File -Force).FullName
-# Pre-install
-echo $DependencyPaths
 Add-AppxProvisionedPackage -Online -PackagePath 'Winget.msixbundle' -DependencyPackagePath $DependencyPaths -LicensePath 'License1.xml'
 
-# Read to install
-echo $DependencyPaths
-# We seem to be running into this:
+# This command can fail with particular versions of Powershell.
 # https://github.com/PowerShell/PowerShell/issues/18708
-echo $PSVersionTable
-echo Add-AppPackage -Path 'Winget.msixbundle' -DependencyPath "$($DependencyPaths[0])", "$($DependencyPaths[1])" -ForceTargetApplicationShutdown -ForceUpdateFromAnyVersion
 Add-AppPackage -Path 'Winget.msixbundle' -DependencyPath "$($DependencyPaths[0])", "$($DependencyPaths[1])" -ForceTargetApplicationShutdown -ForceUpdateFromAnyVersion
