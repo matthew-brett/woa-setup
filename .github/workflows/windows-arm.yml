@@ -29,8 +29,8 @@ jobs:
           winget install cmake --force --accept-source-agreements --accept-package-agreements --verbose
 
       - uses: actions/upload-artifact@v4
+        if: failure()
         with:
-          if: always()
           name: error_logs
           path: $HOME/AppData/Local/Packages
 
