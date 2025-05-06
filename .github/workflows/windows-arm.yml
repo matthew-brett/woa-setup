@@ -20,14 +20,20 @@ jobs:
         run: |
           .\scripts\install_winget.ps1
 
+      - name: Install MSYS2
+        run: |
+          winget install --id=MSYS2.MSYS2 -e
+          cd c:\msys64
+          .\clangarm64.exe
+          pacman -Suy
+
       - name: Install LLVM
         run: |
           winget install --id LLVM.LLVM --version "20.1.0" --accept-source-agreements --accept-package-agreements --silent
 
       - name: Install CMake
         run: |
-          winget uninstall cmake --force --log cmake_uninstall.log
-          winget install cmake --force --log cmake_install.log
+          winget upgrade cmake --force --log cmake_install.log
 
       - uses: actions/upload-artifact@v4
         if: failure()
