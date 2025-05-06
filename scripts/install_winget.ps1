@@ -16,6 +16,10 @@ $Downloads.GetEnumerator() | ForEach-Object {
 Invoke-RestMethod -Uri $_.Value -OutFile $_.Key
 }
 Expand-Archive -Path 'DesktopAppInstaller_Dependencies.zip' -DestinationPath .\ -Force
+
+echo "Files"
+ls arm64
+
 # Get the paths to all of the dependencies
 [string[]]$DependencyPaths = (Get-ChildItem -Path .\arm64 -Filter '*.appx' -File -Force).FullName
 Add-AppxProvisionedPackage -Online -PackagePath 'Winget.msixbundle' -DependencyPackagePath $DependencyPaths -LicensePath 'License1.xml'
