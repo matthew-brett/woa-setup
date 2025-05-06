@@ -25,7 +25,7 @@ jobs:
 
       - name: Install MSYS2
         run: |
-          winget install --id=MSYS2.MSYS2 -e
+          winget install --id=MSYS2.MSYS2 -e --accept-source-agreements --accept-package-agreements
           cd $env:MSYS_ROOT
           .\clangarm64.exe | Out-Null
           .\usr\bin\pacman -Suy --noconfirm
@@ -41,10 +41,6 @@ jobs:
       - name: Install LLVM
         run: |
           winget install --id LLVM.LLVM --version "20.1.0" --accept-source-agreements --accept-package-agreements --silent
-
-      - name: Install CMake
-        run: |
-          winget upgrade cmake --force --log cmake_install.log
 
       - uses: actions/upload-artifact@v4
         if: failure()
