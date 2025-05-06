@@ -33,7 +33,7 @@ jobs:
         if: failure()
         with:
           name: error_logs
-          path: *.log
+          path: "*.log"
 
       - name: Test shell
         run: |
