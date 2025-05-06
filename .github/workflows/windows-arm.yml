@@ -14,7 +14,7 @@ jobs:
         uses: microsoft/setup-msbuild@v2
 
       - name: Install winget and LLVM
-        shell: pwsh
+        shell: powershell
         run: |
           .\scripts\install_winget.ps1
           winget install --id LLVM.LLVM --version "20.1.0"
