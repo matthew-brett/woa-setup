@@ -27,6 +27,8 @@ jobs:
         run: |
           winget install --id=MSYS2.MSYS2 -e --accept-source-agreements --accept-package-agreements
           cd $env:MSYS_ROOT
+          pwd
+          ls
           .\clangarm64.exe | Out-Null
           .\usr\bin\pacman -Suy --noconfirm
           .\usr\bin\pacman.exe -S mingw-w64-clang-aarch64-cmake --noconfirm
