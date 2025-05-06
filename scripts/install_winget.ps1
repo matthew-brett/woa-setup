@@ -15,10 +15,9 @@ $LatestRelease = $WingetReleases | Select-Object -First 1
 $Downloads.GetEnumerator() | ForEach-Object {
 Invoke-RestMethod -Uri $_.Value -OutFile $_.Key
 }
-ls
 Expand-Archive -Path 'DesktopAppInstaller_Dependencies.zip' -DestinationPath .\ -Force
 # Get the paths to all of the dependencies
-[string[]]$DependencyPaths = (Get-ChildItem -Path .\x64 -Filter '*.appx' -File -Force).FullName
+[string[]]$DependencyPaths = (Get-ChildItem -Path .\arm64 -Filter '*.appx' -File -Force).FullName
 Add-AppxProvisionedPackage -Online -PackagePath 'Winget.msixbundle' -DependencyPackagePath $DependencyPaths -LicensePath 'License1.xml'
 
 Add-AppPackage -Path 'Winget.msixbundle' -DependencyPath "$($DependencyPaths[0])", "$($DependencyPaths[1])" -ForceTargetApplicationShutdown -ForceUpdateFromAnyVersion
