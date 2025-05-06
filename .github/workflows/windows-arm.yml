@@ -26,7 +26,7 @@ jobs:
 
       - name: Install CMake
         run: |
-          winget install cmake
+          winget install cmake --force
 
       - name: Test shell
         run: |
