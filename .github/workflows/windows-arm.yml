@@ -24,7 +24,12 @@ jobs:
         run: |
           winget install --id LLVM.LLVM --version "20.1.0" --accept-source-agreements --accept-package-agreements --silent
 
+      - name: Install CMake
+        run: |
+          winget install cmake
+
       - name: Test shell
         run: |
           get-command clang
           get-command flang
+          get-command cmake
