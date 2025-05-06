@@ -15,7 +15,7 @@ jobs:
 
       - name: Install winget and LLVM
         run: |
-          ..\..\install_winget.ps1
+          .\scripts\install_winget.ps1
           winget install --id LLVM.LLVM --version "20.1.0"
 
       - name: Test shell
