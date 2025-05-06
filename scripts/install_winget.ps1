@@ -15,7 +15,7 @@ $LatestRelease = $WingetReleases | Select-Object -First 1
 $Downloads.GetEnumerator() | ForEach-Object {
 Invoke-RestMethod -Uri $_.Value -OutFile $_.Key
 }
-
+ls
 Expand-Archive -Path 'DesktopAppInstaller_Dependencies.zip' -DestinationPath .\ -Force
 # Get the paths to all of the dependencies
 [string[]]$DependencyPaths = (Get-ChildItem -Path .\x64 -Filter '*.appx' -File -Force).FullName
