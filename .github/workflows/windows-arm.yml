@@ -30,7 +30,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          if: '!cancelled()'
+          if: always()
           name: error_logs
           path: $HOME/AppData/Local/Packages
 
