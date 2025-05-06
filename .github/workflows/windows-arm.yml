@@ -26,7 +26,7 @@ jobs:
 
       - name: Install CMake
         run: |
-          winget install cmake --force
+          winget install cmake --force --accept-source-agreements --accept-package-agreements --verbose
 
       - name: Test shell
         run: |
