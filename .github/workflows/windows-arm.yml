@@ -25,7 +25,7 @@ jobs:
 
       - name: Install MSYS2
         run: |
-          winget install --id=MSYS2.MSYS2 -e --accept-source-agreements --accept-package-agreements
+          winget install --id=MSYS2.MSYS2 -e --accept-source-agreements --accept-package-agreements --force --log msys2_install.log
 
       - name: Investigate msys
         run: |
